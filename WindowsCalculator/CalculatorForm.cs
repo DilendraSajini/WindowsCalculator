@@ -151,19 +151,26 @@ namespace WindowsCalculator
 
         public void operandButonClick(String buttonText)
         {
-            updateOperand(buttonText);
-            updateOutPutText(buttonText);
+            try
+            {
+                updateOperand(buttonText);
+                updateOutPutText(buttonText);
+            }
+            catch
+            {
+                Console.WriteLine("Invalid Input");
+            }
         }
 
         private void updateOperand(string buttonText)
         {
             if (!isFirstOperationClicked)
             {
-                calcOperandPart1 += buttonText;
+                setOperandPart1(calcOperandPart1 + buttonText);
             }
             else
             {
-                calcOperandPart2 += buttonText;
+                setOperandPart2(calcOperandPart2 + buttonText);
             }
         }
 
@@ -183,12 +190,12 @@ namespace WindowsCalculator
         {
             if (!isFirstOperationClicked)
             {
-                calcOperandPart1 = updateOperandWithSign(calcOperandPart1);
+                setOperandPart1(updateOperandWithSign(calcOperandPart1));
                 setOutput1(calcOperandPart1);
             }
             else
             {
-                calcOperandPart2 = updateOperandWithSign(calcOperandPart2);
+                setOperandPart2(updateOperandWithSign(calcOperandPart2));
                 setOutput1(calcOperandPart2);
             }
         }
@@ -199,7 +206,7 @@ namespace WindowsCalculator
             {
                 if (!string.IsNullOrEmpty(calcOperandPart1))
                 {
-                    calcOperandPart1 = Math.Pow(float.Parse(calcOperandPart1), 2).ToString();
+                    setOperandPart1(CalculatorUtil.getSquared(float.Parse(calcOperandPart1)).ToString());
                     setOutput1(calcOperandPart1);
                 }
             }
@@ -207,7 +214,7 @@ namespace WindowsCalculator
             {
                 if (!string.IsNullOrEmpty(calcOperandPart2))
                 {
-                    calcOperandPart2 = Math.Pow(float.Parse(calcOperandPart2), 2).ToString();
+                    setOperandPart2(CalculatorUtil.getSquared(float.Parse(calcOperandPart2)).ToString());
                     setOutput1(calcOperandPart2);
                 }
             }
@@ -219,7 +226,7 @@ namespace WindowsCalculator
             {
                 if (!string.IsNullOrEmpty(calcOperandPart1))
                 {
-                    calcOperandPart1 = Math.Sqrt(float.Parse(calcOperandPart1)).ToString();
+                    setOperandPart1(Math.Sqrt(float.Parse(calcOperandPart1)).ToString());
                     setOutput1(calcOperandPart1);
                 }
             }
@@ -227,7 +234,7 @@ namespace WindowsCalculator
             {
                 if (!string.IsNullOrEmpty(calcOperandPart2))
                 {
-                    calcOperandPart2 = Math.Sqrt(float.Parse(calcOperandPart2)).ToString();
+                    setOperandPart2(Math.Sqrt(float.Parse(calcOperandPart2)).ToString());
                     setOutput1(calcOperandPart2);
                 }
             }
@@ -241,7 +248,7 @@ namespace WindowsCalculator
             }
             else if (!string.IsNullOrEmpty(calcOperandPart1))
             {
-                calcOperandPart1 = (1.0 / float.Parse(calcOperandPart1)).ToString();
+                setOperandPart1((1.0 / float.Parse(calcOperandPart1)).ToString());
                 setOutput1(calcOperandPart1);
             }
 
@@ -255,43 +262,29 @@ namespace WindowsCalculator
             }
             if (isFirstOperationClicked)
             {
-                if (!string.IsNullOrEmpty(calcOperandPart1) && !string.IsNullOrEmpty(calcOperandPart2))
+                if (calcOperandPart2.Equals(""))
                 {
-                    float operand1 = float.Parse(calcOperandPart1);
-                    float operand2 = float.Parse(calcOperandPart2);
-                    switch (calcOperator1)
-                    {
-                        case "+":
-                        case "-":
-                            calcOperandPart2 = (operand2 * (operand1 / 100)).ToString();
-                            break;
-                        case "*":
-                        case "/":
-                            calcOperandPart2 = (operand2 / 100).ToString();
-                            break;
-                        default:
-                            Console.WriteLine("Error: Invalid operator. Please provide a valid operator (+, -, *, /).");
-                            break;
-
-                    }
-                    setOutput(calcOperandPart2, calcOperandPart1 + " " + calcOperator1 + " " + calcOperandPart2);
+                    setPercentage(calcOperandPart1, calcOperandPart1, calcOperator1);
                 }
+                else
+                {
+                    setPercentage(calcOperandPart1, calcOperandPart2, calcOperator1);
+                }
+            }
+        }
 
+        private void setPercentage(string value1, string value2, string op)
+        {
+            if (!string.IsNullOrEmpty(value1) && !string.IsNullOrEmpty(value2))
+            {
+                setOperandPart2(CalculatorUtil.getPercentage(value1, value2, op));
+                setOutput(calcOperandPart2, calcOperandPart1 + " " + calcOperator1 + " " + calcOperandPart2);
             }
         }
 
         private string updateOperandWithSign(string operand)
         {
-            if (operand != "0")
-            {
-                if (!string.IsNullOrEmpty(operand))
-                {
-                    float operand1 = float.Parse(operand);
-                    float newOperand1 = operand1 * (-1);
-                    return newOperand1.ToString();
-                }
-            }
-            return operand;
+            return CalculatorUtil.getSigned(operand);
         }
 
         private void setEqualClicked(Button button)
@@ -311,7 +304,7 @@ namespace WindowsCalculator
             }
             else
             {
-                setOutput(calculateWithSecondOperand(calcOperandPart1, calcOperandPart2, calcOperator1).ToString(), calcOperandPart1 + " " + calcOperator1 + " " + calcOperandPart2);
+                setOutput(CalculatorUtil.calculateWithSecondOperand(calcOperandPart1, calcOperandPart2, calcOperator1).ToString(), calcOperandPart1 + " " + calcOperator1 + " " + calcOperandPart2);
             }
 
             resetCalculation();
@@ -319,7 +312,6 @@ namespace WindowsCalculator
         private void setOperationClicked(Button button)
         {
             setOperationClick(button.Text);
-
         }
 
         public void setOperationClick(String buttonText)
@@ -327,62 +319,68 @@ namespace WindowsCalculator
             if (!isFirstOperationClicked)
             {
                 isFirstOperationClicked = true;
-                calcOperator1 = buttonText;
+                setOperator1(buttonText);
                 string calculationString = calcOperandPart1 + " " + calcOperator1 + " ";
                 setOutput2(calculationString);
             }
             else
             {
-
-                calcOperator2 = buttonText;
-                string result = calculateWithSecondOperand(calcOperandPart1, calcOperandPart2, calcOperator1);
-                calcOperandPart1 = result;
-
-                calcOperator1 = calcOperator2;
+                setOperator2(buttonText);
+                setOperandPart1(CalculatorUtil.calculateWithSecondOperand(calcOperandPart1, calcOperandPart2, calcOperator1));
+                setOperator1(calcOperator2);
                 setOutput(calcOperandPart1, calcOperandPart1 + " " + calcOperator1 + " ");
                 resetCalculation();
-
-
             }
-        }
-        private string calculateWithSecondOperand(string value1, string value2, string op)
-        {
-            float result = 0;
-            if (!string.IsNullOrEmpty(value1) && !string.IsNullOrEmpty(value2) && !string.IsNullOrEmpty(op))
-            {
-
-                float operand1 = float.Parse(value1);
-                float operand2 = float.Parse(value2);
-
-                switch (op)
-                {
-                    case "+":
-                        return (operand1 + operand2).ToString();
-                    case "-":
-                        return (operand1 - operand2).ToString();
-                    case "*":
-                        return (operand1 * operand2).ToString();
-                    case "/":
-                        if (operand2 == 0)
-                        {
-                            Console.WriteLine("Error: Division by zero is not allowed.");
-                            resetCalculator();
-                            return "Cannot divide by zero";
-                        }
-                        result = operand1 / operand2;
-                        return result.ToString();
-                    default:
-                        Console.WriteLine("Error: Invalid operator. Please provide a valid operator (+, -, *, /).");
-                        return result.ToString();
-
-                }
-            }
-            return result.ToString();
         }
 
         private string calculateWithOperatorOnly(string value1, string op)
         {
-            return calculateWithSecondOperand(value1, value1, calcOperator1);
+            return CalculatorUtil.calculateWithSecondOperand(value1, value1, calcOperator1);
+        }
+
+        public void resetCalculator()
+        {
+            resetOutPut();
+            resetOperator();
+            resetOperand();
+            isFirstOperationClicked = false;
+
+        }
+        public void resetOperandAndOutPut1()
+        {
+            if (!isFirstOperationClicked)
+            {
+                resetOperand1();
+                resetOutPut1();
+            }
+            else
+            {
+                resetOperand2();
+                resetOutPut1();
+            }
+        }
+        public void eraseLastLetterOperandAndOutPut1()
+        {
+            if (!isFirstOperationClicked)
+            {
+                if (calcOperandPart1.Length == 0) return;
+                setOperandPart1(CalculatorUtil.getBackSpacedLastCharacter(calcOperandPart1));
+                setOutput1(calcOperandPart1);
+            }
+            else
+            {
+                if (calcOperandPart2.Length == 0) return;
+                setOperandPart2(CalculatorUtil.getBackSpacedLastCharacter(calcOperandPart2));
+                setOutput1(calcOperandPart2);
+            }
+        }
+
+        private void resetCalculation()
+        {
+            resetOperator();
+            resetOperand();
+            isFirstOperationClicked = false;
+
         }
 
         private void setOutput(string outPut1, string outPut2)
@@ -400,77 +398,50 @@ namespace WindowsCalculator
         {
             output2.Text = value;
         }
-
-        public void resetCalculator()
-        {
-            resetOutPut();
-            resetOperator();
-            resetOperand();
-            isFirstOperationClicked = false;
-
-        }
-        public void resetOperandAndOutPut1()
-        {
-            if (!isFirstOperationClicked)
-            {
-                calcOperandPart1 = "";
-                setOutput1("");
-            }
-            else
-            {
-                calcOperandPart2 = "";
-                setOutput1("");
-            }
-        }
-        public void eraseLastLetterOperandAndOutPut1()
-        {
-            if (!isFirstOperationClicked)
-            {
-                if (calcOperandPart1.Length == 0)
-                {
-                    return;
-                }
-                if (calcOperandPart1.Length > 1)
-                {
-                    calcOperandPart1 = calcOperandPart1.Remove(calcOperandPart1.Length - 1);
-                }
-                else
-                {
-                    calcOperandPart1 = "0";
-                }
-                setOutput1(calcOperandPart1);
-            }
-            else
-            {
-                if (calcOperandPart2.Length == 0)
-                {
-                    return;
-                }
-                if (calcOperandPart2.Length == 1)
-                {
-                    calcOperandPart2 = "0";
-                }
-                else if (calcOperandPart2.Length > 1)
-                {
-                    calcOperandPart2 = calcOperandPart2.Remove(calcOperandPart2.Length - 1);
-                }
-                //calcOperandPart2 = CalculatorUtil.eraseLastCharacter(calcOperandPart2);
-                setOutput1(calcOperandPart2);
-            }
-        }
-
-        private void resetCalculation()
-        {
-            resetOperator();
-            resetOperand();
-            isFirstOperationClicked = false;
-
-        }
-
-        private void resetOperand()
+        private void resetOperand1()
         {
             calcOperandPart1 = "";
+        }
+
+        private void resetOperand2()
+        {
             calcOperandPart2 = "";
+        }
+        private void resetOperand()
+        {
+            resetOperand1();
+            resetOperand2();
+        }
+
+        private void setOperandPart1(String operand)
+        {
+            if (CalculatorUtil.isValidOperand(operand))
+            {
+                calcOperandPart1 = operand;
+            }
+            else
+            {
+                throw new InvalidExpressionException();
+            }
+        }
+        private void setOperandPart2(String operand)
+        {
+            if (CalculatorUtil.isValidOperand(operand))
+            {
+                calcOperandPart2 = operand;
+            }
+            else
+            {
+                throw new InvalidExpressionException();
+            }
+        }
+        private void setOperator1(string value)
+        {
+            calcOperator1 = value;
+        }
+        private void setOperator2(string value)
+        {
+            calcOperator2 = value;
         }
 
         private void resetOperator()
@@ -479,10 +450,18 @@ namespace WindowsCalculator
             calcOperator2 = "";
         }
 
-        private void resetOutPut()
+        private void resetOutPut1()
         {
             setOutput1("");
+        }
+        private void resetOutPut2()
+        {
             setOutput2("");
+        }
+        private void resetOutPut()
+        {
+            resetOutPut1();
+            resetOutPut2();
         }
     }
 }

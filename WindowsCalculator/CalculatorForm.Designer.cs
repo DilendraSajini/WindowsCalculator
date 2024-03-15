@@ -1,4 +1,6 @@
 ﻿
+using System.Windows.Forms;
+
 namespace WindowsCalculator
 {
     partial class CalculatorForm
@@ -59,7 +61,6 @@ namespace WindowsCalculator
             // 
             // output1
             // 
-            this.output1.Enabled = false;
             this.output1.Location = new System.Drawing.Point(12, 41);
             this.output1.Name = "output1";
             this.output1.Size = new System.Drawing.Size(229, 23);
@@ -258,7 +259,6 @@ namespace WindowsCalculator
             // 
             // output2
             // 
-            this.output2.Enabled = false;
             this.output2.Location = new System.Drawing.Point(115, 11);
             this.output2.Name = "output2";
             this.output2.Size = new System.Drawing.Size(126, 23);
@@ -351,8 +351,15 @@ namespace WindowsCalculator
             this.ResumeLayout(false);
             this.PerformLayout();
 
+            this.KeyPreview = true;
+            this.KeyPress += inputValidator;
         }
 
+        private void inputValidator(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = CalculatorUtil.isNumpadInput(e.KeyChar);
+            e.Handled =  CalculatorUtil.isValidInput(e.KeyChar);
+        }
         public string Output1
         {
             get { return output1.Text; }

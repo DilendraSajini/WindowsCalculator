@@ -77,6 +77,17 @@ namespace WindowsCalculator.UnitTests
             return form.Output1;
         }
 
+        [TestCase("1", ".", ".", ExpectedResult = "1.")]
+        [TestCase("1", ".", "$", ExpectedResult = "1.")]
+        public string testInvalidInPut(string operand1, string operand2, string operand3)
+        {
+            CalculatorForm form = new CalculatorForm();
+            form.operandButonClick(operand1);
+            form.operandButonClick(operand2);
+            form.operandButonClick(operand3);
+            return form.Output1;
+        }
+
         [TearDown]
         public void TearDown()
         {

@@ -18,6 +18,20 @@ namespace WindowsCalculator.UnitTests
             return form.Output1;
         }
 
+        [TestCase("0", "+", ExpectedResult = "0")]
+        [TestCase("1", "-", ExpectedResult = "0.01")]
+        [TestCase("2", "/", ExpectedResult = "0.02")]
+        [TestCase("3", "*", ExpectedResult = "0.03")]
+        public string testOneOperandsAndOperatorClick_shouldReturnValidOutput1(string operand1, string op)
+        {
+            CalculatorForm form = new CalculatorForm();
+            form.operandButonClick(operand1);
+            form.setOperationClick(op);
+            form.setPerClicked();
+            return form.Output1;
+        }
+
+
         [TestCase("0", "1", "+", ExpectedResult = "0")]
         [TestCase("1", "2", "-", ExpectedResult = "0.02")]
         [TestCase("2", "3", "/", ExpectedResult = "0.03")]
