@@ -9,6 +9,7 @@ namespace WindowsCalculator.UnitTests
         [TestCase("0", "1", "+", ExpectedResult = "1")]
         [TestCase("1", "2", "-", ExpectedResult = "2")]
         [TestCase("2", "3", "/", ExpectedResult = "3")]
+        [TestCase("2", "0", "/", ExpectedResult = "0")]
         [TestCase("3", "4", "*", ExpectedResult = "4")]
         [TestCase("4", "5", "+", ExpectedResult = "5")]
         public string testTwoOperandsAndOperatorClick_shouldReturnValidOutput1(string operand1, string operand2, string op)

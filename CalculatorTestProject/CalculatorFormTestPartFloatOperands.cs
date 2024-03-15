@@ -61,7 +61,23 @@ namespace WindowsCalculator.UnitTests
             return form.Output2;
         }
 
-    [TearDown]
+        [TestCase("0", ".", "5", "1", "+", ExpectedResult = "2")]
+        public string testDuplicateFloatOperandsAndOperatorClick_shouldReturnValidOutput1(string operand1Part1, string opDot, string operand1Part2, string operand2Part1, string op)
+        {
+            CalculatorForm form = new CalculatorForm();
+            form.operandButonClick(operand1Part1);
+            form.operandButonClick(opDot);
+            form.operandButonClick(opDot);
+            form.operandButonClick(operand1Part2);
+            form.setOperationClick(op);
+            form.operandButonClick(operand2Part1);
+            form.operandButonClick(opDot);
+            form.operandButonClick(operand1Part2);
+            form.setEqualClicked("=");
+            return form.Output1;
+        }
+
+        [TearDown]
         public void TearDown()
         {
         }

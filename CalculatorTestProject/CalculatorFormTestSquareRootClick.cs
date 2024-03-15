@@ -19,6 +19,20 @@ namespace WindowsCalculator.UnitTests
             return form.Output1;
         }
 
+        [TestCase("0", ExpectedResult = "0")]
+        [TestCase("1", ExpectedResult = "1")]
+        [TestCase("625", ExpectedResult = "5")]
+        [TestCase("6561", ExpectedResult = "9")]
+        [TestCase("16", ExpectedResult = "2")]
+        public string testOperandAndMultipleOperatorClick_shouldReturnValidOutput1(string operand1)
+        {
+            CalculatorForm form = new CalculatorForm();
+            form.operandButonClick(operand1);
+            form.setSquareRootClicked();
+            form.setSquareRootClicked();
+            return form.Output1;
+        }
+
         [TearDown]
         public void TearDown()
         {

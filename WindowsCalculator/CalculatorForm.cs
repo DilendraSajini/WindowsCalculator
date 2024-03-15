@@ -12,11 +12,12 @@ namespace WindowsCalculator
 {
     public partial class CalculatorForm : Form
     {
-        string calcOperandPart1 = "";
-        String calcOperandPart2 = "";
-        string calcOperator1 = "";
-        string calcOperator2 = "";
-        Boolean isFirstOperationClicked = false;
+        private string calcOperandPart1 = "";
+        private String calcOperandPart2 = "";
+        private string calcOperator1 = "";
+        private string calcOperator2 = "";
+        private Boolean isFirstOperationClicked = false;
+        private const string ZERO_TEXT = "0";
 
         public CalculatorForm()
         {
@@ -242,7 +243,7 @@ namespace WindowsCalculator
 
         public void setReciprocalClicked()
         {
-            if (calcOperandPart1.Equals("0"))
+            if (calcOperandPart1.Equals(ZERO_TEXT))
             {
                 setOutput1("Cannot divide by zero");
             }
@@ -258,7 +259,7 @@ namespace WindowsCalculator
         {
             if (!isFirstOperationClicked)
             {
-                setOutput1("0");
+                setOutput1(ZERO_TEXT);
             }
             if (isFirstOperationClicked)
             {
@@ -320,8 +321,7 @@ namespace WindowsCalculator
             {
                 isFirstOperationClicked = true;
                 setOperator1(buttonText);
-                string calculationString = calcOperandPart1 + " " + calcOperator1 + " ";
-                setOutput2(calculationString);
+                setOutput2(calcOperandPart1 + " " + calcOperator1 + " ");
             }
             else
             {

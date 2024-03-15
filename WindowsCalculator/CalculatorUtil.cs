@@ -8,11 +8,13 @@ namespace WindowsCalculator
 {
     static class CalculatorUtil
     {
+        private const string ZERO_TEXT = "0";
+
         public static string getBackSpacedLastCharacter(string value)
         {
             if (value.Length == 1)
             {
-                return "0";
+                return ZERO_TEXT;
             }
             return value.Remove(value.Length - 1);
         }
@@ -37,7 +39,7 @@ namespace WindowsCalculator
                     return ((operand2 / 100).ToString());
                 default:
                     Console.WriteLine("Error: Invalid operator. Please provide a valid operator (+, -, *, /).");
-                    return "0";
+                    return ZERO_TEXT;
             }
 
         }
@@ -78,7 +80,7 @@ namespace WindowsCalculator
 
         public static string getSigned(string value)
         {
-            if (value != "0")
+            if (value != ZERO_TEXT)
             {
                 if (!string.IsNullOrEmpty(value))
                 {

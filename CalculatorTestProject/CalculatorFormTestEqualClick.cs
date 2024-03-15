@@ -6,6 +6,24 @@ namespace WindowsCalculator.UnitTests
     public class CalculatorFormTestEqualClick
     {
 
+        [TestCase("1", ExpectedResult = "1")]
+        public string testOneOperandAndEqualClick_shouldReturnValidOutput1(string operand1)
+        {
+            CalculatorForm form = new CalculatorForm();
+            form.operandButonClick(operand1);
+            form.setEqualClicked("=");
+            return form.Output1;
+        }
+
+        [TestCase("1", ExpectedResult = "1 =")]
+        public string testOneOperandAndEqualClick_shouldReturnValidOutput2(string operand1)
+        {
+            CalculatorForm form = new CalculatorForm();
+            form.operandButonClick(operand1);
+            form.setEqualClicked("=");
+            return form.Output2;
+        }
+
         [TestCase("0", "1", "+", ExpectedResult = "1")]
         [TestCase("1", "2", "-", ExpectedResult = "-1")]
         [TestCase("2", "3", "/", ExpectedResult = "0.6666667")]
