@@ -65,7 +65,6 @@ namespace WindowsCalculator
             this.output1.Name = "output1";
             this.output1.Size = new System.Drawing.Size(229, 23);
             this.output1.TabIndex = 0;
-            this.output1.TextChanged += output1_TextChanged;
             // 
             // button1
             // 
@@ -250,12 +249,12 @@ namespace WindowsCalculator
             // buttonPer
             // 
             this.buttonPer.Location = new System.Drawing.Point(13, 70);
-            this.buttonPer.Name = "buttonPer";
+            this.buttonPer.Name = "buttonPercentage";
             this.buttonPer.Size = new System.Drawing.Size(42, 37);
             this.buttonPer.TabIndex = 20;
             this.buttonPer.Text = "%";
             this.buttonPer.UseVisualStyleBackColor = true;
-            this.buttonPer.Click += buttonPercentageClick;
+            this.buttonPer.Click += new System.EventHandler(this.buttonPercentageClick);
             // 
             // output2
             // 
@@ -345,13 +344,13 @@ namespace WindowsCalculator
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.output1);
+            this.KeyPreview = true;
             this.Name = "CalculatorForm";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1Load);
             this.ResumeLayout(false);
             this.PerformLayout();
-            this.KeyPress += handlerKeyPressInput;
-            this.KeyPreview = true;
+
         }
 
         public string Output1
