@@ -102,7 +102,7 @@ namespace WindowsCalculator
 
         }
 
-        public void eraseLastLetterOperandAndOutPut1()
+        public void eraseLastLetterOfOperand()
         {
             setEraseLastLetterOperand();
             eraseLastOutput1();
@@ -251,7 +251,7 @@ namespace WindowsCalculator
 
         private void buttonBackClick(object sender, EventArgs e)
         {
-            eraseLastLetterOperandAndOutPut1();
+            eraseLastLetterOfOperand();
         }
 
         private void buttonPercentageClick(object sender, EventArgs e)
@@ -568,6 +568,5 @@ namespace WindowsCalculator
             resetOutPut1();
             resetOutPut2();
         }
-
     }
 }

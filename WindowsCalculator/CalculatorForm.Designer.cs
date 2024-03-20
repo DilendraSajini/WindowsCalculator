@@ -65,6 +65,7 @@ namespace WindowsCalculator
             this.output1.Name = "output1";
             this.output1.Size = new System.Drawing.Size(229, 23);
             this.output1.TabIndex = 0;
+            this.output1.Text = "0";
             // 
             // button1
             // 
@@ -249,7 +250,7 @@ namespace WindowsCalculator
             // buttonPer
             // 
             this.buttonPer.Location = new System.Drawing.Point(13, 70);
-            this.buttonPer.Name = "buttonPercentage";
+            this.buttonPer.Name = "buttonPer";
             this.buttonPer.Size = new System.Drawing.Size(42, 37);
             this.buttonPer.TabIndex = 20;
             this.buttonPer.Text = "%";

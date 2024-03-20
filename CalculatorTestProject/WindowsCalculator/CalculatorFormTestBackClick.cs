@@ -6,25 +6,64 @@ namespace CalculatorTestProject.WindowsCalculator
     [TestFixture]
     public class CalculatorFormTestBackClick
     {
-        [TestCase("", ExpectedResult = "")]
-        public string testBackClickWithNOperand_shouldDoNothing(string operand1)
+        [TestCase("", ExpectedResult = "0")]
+        public string testBackClickWithNOperand_shouldReturnEmptyOutput1(string operand1)
         {
             CalculatorForm form = new CalculatorForm();
             form.operandButonClick(operand1);
-            form.eraseLastLetterOperandAndOutPut1();
+            form.eraseLastLetterOfOperand();
             return form.Output1;
         }
+
+        [TestCase("0", ExpectedResult = "0")]
+        public string testBackClickWithZeroOperand_shouldNotUpdateOutput1(string operand1)
+        {
+            CalculatorForm form = new CalculatorForm();
+            form.operandButonClick(operand1);
+            string outputBeforeApplyOperator = form.Output1;
+            form.eraseLastLetterOfOperand();
+            Assert.AreEqual(outputBeforeApplyOperator, form.Output1);
+            return form.Output1;
+        }
+
+        [TestCase("1", ExpectedResult = "0")]
+        [TestCase("12", ExpectedResult = "1")]
+        public string testBackClickWithOperand_shouldUpdateOutput1(string operand1)
+        {
+            CalculatorForm form = new CalculatorForm();
+            form.operandButonClick(operand1);
+            string outputBeforeApplyOperator = form.Output1;
+            form.eraseLastLetterOfOperand();
+            Assert.AreNotEqual(outputBeforeApplyOperator, form.Output1);
+            return form.Output1;
+        }
+
+        [TestCase("12", ExpectedResult = "0")]
+        public string testBackClickWithMultipleClicks_shouldUpdateOutput1(string operand1)
+        {
+            CalculatorForm form = new CalculatorForm();
+            form.operandButonClick(operand1);
+            string outputBeforeApplyOperator = form.Output1;
+            form.eraseLastLetterOfOperand();
+            form.eraseLastLetterOfOperand();
+            Assert.AreNotEqual(outputBeforeApplyOperator, form.Output1);
+            return form.Output1;
+        }
+
 
         [TestCase("0", "+", ExpectedResult = "0")]
         [TestCase("1", "-", ExpectedResult = "1")]
         [TestCase("2", "/", ExpectedResult = "2")]
         [TestCase("3", "*", ExpectedResult = "3")]
-        public string testBackClickWithFirstOperand_shouldEraceLastLetterOfOutput1(string operand1, string op)
+        public string testBackClickWithFirstOperand_shouldNotChangeOutput1(string operand1, string op)
         {
             CalculatorForm form = new CalculatorForm();
             form.operandButonClick(operand1);
             form.setOperationClick(op);
-            form.eraseLastLetterOperandAndOutPut1();
+            string outputBeforeApplyOperator = form.Output1;
+            Assert.AreEqual(operand1, outputBeforeApplyOperator);
+            form.eraseLastLetterOfOperand();
+            Assert.AreEqual(outputBeforeApplyOperator, form.Output1);
             return form.Output1;
         }
 
@@ -32,12 +71,15 @@ namespace CalculatorTestProject.WindowsCalculator
         [TestCase("13", "-", ExpectedResult = "13")]
         [TestCase("25", "/", ExpectedResult = "25")]
         [TestCase("36", "*", ExpectedResult = "36")]
-        public string testBackClickWithFirstOperandMultipleCharacters_shouldEraceLastLetterOfOutput1(string operand1, string op)
+        public string testBackClickWithFirstOperandMultipleCharacters_shouldNotChangeOutput1(string operand1, string op)
         {
             CalculatorForm form = new CalculatorForm();
             form.operandButonClick(operand1);
             form.setOperationClick(op);
-            form.eraseLastLetterOperandAndOutPut1();
+            string outputBeforeApplyOperator = form.Output1;
+            Assert.AreEqual(operand1, outputBeforeApplyOperator);
+            form.eraseLastLetterOfOperand();
+            Assert.AreEqual(outputBeforeApplyOperator, form.Output1);
             return form.Output1;
         }
 
@@ -52,7 +94,10 @@ namespace CalculatorTestProject.WindowsCalculator
             form.operandButonClick(operand1);
             form.setOperationClick(op);
             form.operandButonClick(operand2);
-            form.eraseLastLetterOperandAndOutPut1();
+            string outputBeforeApplyOperator = form.Output1;
+            Assert.AreEqual(operand2, outputBeforeApplyOperator);
+            form.eraseLastLetterOfOperand();
+            Assert.AreNotEqual(outputBeforeApplyOperator, form.Output1);
             return form.Output1;
         }
 
@@ -67,7 +112,29 @@ namespace CalculatorTestProject.WindowsCalculator
             form.operandButonClick(operand1);
             form.setOperationClick(op);
             form.operandButonClick(operand2);
-            form.eraseLastLetterOperandAndOutPut1();
+            string outputBeforeApplyOperator = form.Output1;
+            Assert.AreEqual(operand2, outputBeforeApplyOperator);
+            form.eraseLastLetterOfOperand();
+            Assert.AreNotEqual(outputBeforeApplyOperator, form.Output1);
+            return form.Output1;
+        }
+
+        [TestCase("0", "12", "+", ExpectedResult = "0")]
+        [TestCase("1", "23", "-", ExpectedResult = "0")]
+        [TestCase("2", "34", "/", ExpectedResult = "0")]
+        [TestCase("3", "45", "*", ExpectedResult = "0")]
+        [TestCase("4", "56", "+", ExpectedResult = "0")]
+        public string testBackClickWithSecondOperandMultipleCharacters_shouldEraceMultipleLetterOfOutput1(string operand1, string operand2, string op)
+        {
+            CalculatorForm form = new CalculatorForm();
+            form.operandButonClick(operand1);
+            form.setOperationClick(op);
+            form.operandButonClick(operand2);
+            string outputBeforeApplyOperator = form.Output1;
+            Assert.AreEqual(operand2, outputBeforeApplyOperator);
+            form.eraseLastLetterOfOperand();
+            form.eraseLastLetterOfOperand();
+            Assert.AreNotEqual(outputBeforeApplyOperator, form.Output1);
             return form.Output1;
         }
 
