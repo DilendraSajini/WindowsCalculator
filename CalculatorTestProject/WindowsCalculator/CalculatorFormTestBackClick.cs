@@ -102,7 +102,7 @@ namespace CalculatorTestProject.WindowsCalculator
         [TestCase("13", ExpectedResult = "169")]
         [TestCase("25", ExpectedResult = "625")]
         [TestCase("36", ExpectedResult = "1296")]
-        public string testBackClickWithFirstOperAndSquareRootOperator_shouldNotChangeOutput1(string operand1)
+        public string testBackClickWithFirstOperandAndSquareRootOperator_shouldNotChangeOutput1(string operand1)
         {
             CalculatorForm form = new CalculatorForm();
             form.operandButonClick(operand1);
