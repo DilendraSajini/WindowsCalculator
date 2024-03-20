@@ -185,7 +185,6 @@ namespace WindowsCalculator
         {
             if (isAllowedResetOutput)
             {
-                resetOperand1();
                 resetOutPut1();
                 isAllowedResetOutput = false;
             }
@@ -195,7 +194,6 @@ namespace WindowsCalculator
         {
             if (isAllowedResetOutput)
             {
-                resetOperand1();
                 resetOutPut1();
                 isAllowedResetOutput = false;
             }
