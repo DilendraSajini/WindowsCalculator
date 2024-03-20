@@ -55,7 +55,7 @@ namespace CalculatorTestProject.WindowsCalculator
         [TestCase("1", "-", ExpectedResult = "1")]
         [TestCase("2", "/", ExpectedResult = "2")]
         [TestCase("3", "*", ExpectedResult = "3")]
-        public string testBackClickWithFirstOperand_shouldNotChangeOutput1(string operand1, string op)
+        public string testBackClickWithFirstOperandAndOperator_shouldNotChangeOutput1(string operand1, string op)
         {
             CalculatorForm form = new CalculatorForm();
             form.operandButonClick(operand1);
@@ -71,13 +71,43 @@ namespace CalculatorTestProject.WindowsCalculator
         [TestCase("13", "-", ExpectedResult = "13")]
         [TestCase("25", "/", ExpectedResult = "25")]
         [TestCase("36", "*", ExpectedResult = "36")]
-        public string testBackClickWithFirstOperandMultipleCharacters_shouldNotChangeOutput1(string operand1, string op)
+        public string testBackClickWithFirstOperandAndOperatorMultipleCharacters_shouldNotChangeOutput1(string operand1, string op)
         {
             CalculatorForm form = new CalculatorForm();
             form.operandButonClick(operand1);
             form.setOperationClick(op);
             string outputBeforeApplyOperator = form.Output1;
             Assert.AreEqual(operand1, outputBeforeApplyOperator);
+            form.eraseLastLetterOfOperand();
+            Assert.AreEqual(outputBeforeApplyOperator, form.Output1);
+            return form.Output1;
+        }
+
+        [TestCase("07", ExpectedResult = "49")]
+        [TestCase("13", ExpectedResult = "169")]
+        [TestCase("25", ExpectedResult = "625")]
+        [TestCase("36", ExpectedResult = "1296")]
+        public string testBackClickWithFirstOperAndSquaredOperator_shouldNotChangeOutput1(string operand1)
+        {
+            CalculatorForm form = new CalculatorForm();
+            form.operandButonClick(operand1);
+            form.setSquaredClicked();
+            string outputBeforeApplyOperator = form.Output1;
+            form.eraseLastLetterOfOperand();
+            Assert.AreEqual(outputBeforeApplyOperator, form.Output1);
+            return form.Output1;
+        }
+
+        [TestCase("07", ExpectedResult = "49")]
+        [TestCase("13", ExpectedResult = "169")]
+        [TestCase("25", ExpectedResult = "625")]
+        [TestCase("36", ExpectedResult = "1296")]
+        public string testBackClickWithFirstOperAndSquareRootOperator_shouldNotChangeOutput1(string operand1)
+        {
+            CalculatorForm form = new CalculatorForm();
+            form.operandButonClick(operand1);
+            form.setSquaredClicked();
+            string outputBeforeApplyOperator = form.Output1;
             form.eraseLastLetterOfOperand();
             Assert.AreEqual(outputBeforeApplyOperator, form.Output1);
             return form.Output1;

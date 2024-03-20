@@ -19,7 +19,8 @@ namespace WindowsCalculator
         private String calcOperandPart2 = "";
         private string calcOperator1 = "";
         private string calcOperator2 = "";
-        private Boolean isFirstOperationApplied = false;
+        private Boolean isFirstBasicOperationApplied = false;
+        private Boolean isErasableOperatorOutput = true;
         private const string ZERO_TEXT = "0";
 
         public CalculatorForm()
@@ -49,18 +50,21 @@ namespace WindowsCalculator
 
         public void setSquaredClicked()
         {
+            isErasableOperatorOutput = false;
             updateSquaredOperand();
             updateOperandOutPut1();
         }
 
         public void setSquareRootClicked()
         {
+            isErasableOperatorOutput = false;
             updateSquareRootOperand();
             updateOperandOutPut1();
         }
 
         public void setReciprocalClicked()
         {
+            isErasableOperatorOutput = false;
             if (calcOperandPart1.Equals(ZERO_TEXT))
             {
                 setOutput1("Cannot divide by zero");
@@ -75,6 +79,7 @@ namespace WindowsCalculator
 
         public void setPercentageClicked()
         {
+            isErasableOperatorOutput = false;
             updatePercentageOperand();
             updatePercentageOutPut();
 
@@ -82,6 +87,7 @@ namespace WindowsCalculator
 
         public void setEqualClicked(String buttonText)
         {
+            isErasableOperatorOutput = false;
             updateEqualOutPut(buttonText);
             resetCalculation();
         }
@@ -98,7 +104,7 @@ namespace WindowsCalculator
             resetOutPut();
             resetOperator();
             resetOperand();
-            isFirstOperationApplied = false;
+            isFirstBasicOperationApplied = false;
 
         }
 
@@ -106,6 +112,15 @@ namespace WindowsCalculator
         {
             setEraseLastLetterOperand();
             eraseLastOutput1();
+        }
+
+        public void handlerKeyPressInput(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = CalculatorUtil.isValidNumpadInput(e.KeyChar, output1.Text);
+            if (sender is CalculatorForm)
+            {
+                KeyPressInputHandler(e.KeyChar);
+            }
         }
 
         public void KeyPressInputHandler(char ch)
@@ -132,6 +147,7 @@ namespace WindowsCalculator
                         updatePercentageOperand();
                         break;
                     case '<':
+                    case '\r':
                         setEqualClicked(input);
                         break;
                     default:
@@ -268,12 +284,12 @@ namespace WindowsCalculator
 
         private void updateOperand(string buttonText)
         {
-            if (!isFirstOperationApplied)
+            if (!isFirstBasicOperationApplied)
             {
                 string operand1 = calcOperandPart1 + buttonText;
                 setOperandPart1(operand1);
             }
-            else if (isFirstOperationApplied)
+            else if (isFirstBasicOperationApplied)
             {
                 string operand2 = calcOperandPart2 + buttonText;
                 setOperandPart2(operand2);
@@ -282,11 +298,11 @@ namespace WindowsCalculator
 
         private void updateOperandOutPut1()
         {
-            if (!isFirstOperationApplied && StringUtil.isValidSring(calcOperandPart1))
+            if (!isFirstBasicOperationApplied && StringUtil.isValidSring(calcOperandPart1))
             {
                 setOutput1(calcOperandPart1);
             }
-            if (isFirstOperationApplied && StringUtil.isValidSring(calcOperandPart2))
+            if (isFirstBasicOperationApplied && StringUtil.isValidSring(calcOperandPart2))
             {
                 setOutput1(calcOperandPart2);
             }
@@ -294,12 +310,12 @@ namespace WindowsCalculator
 
         private void updateSignOperand()
         {
-            if (!isFirstOperationApplied)
+            if (!isFirstBasicOperationApplied)
             {
                 string operand1 = CalculatorUtil.getSignedString(calcOperandPart1);
                 setOperandPart1(operand1);
             }
-            else if (isFirstOperationApplied)
+            else if (isFirstBasicOperationApplied)
             {
                 string operand2 = CalculatorUtil.getSignedString(calcOperandPart2);
                 setOperandPart2(operand2);
@@ -308,7 +324,7 @@ namespace WindowsCalculator
 
         private void updateSquaredOperand()
         {
-            if (!isFirstOperationApplied)
+            if (!isFirstBasicOperationApplied)
             {
                 if (CalculatorUtil.isValidStringOperand(calcOperandPart1))
                 {
@@ -326,7 +342,7 @@ namespace WindowsCalculator
 
         private void updateSquareRootOperand()
         {
-            if (!isFirstOperationApplied)
+            if (!isFirstBasicOperationApplied)
             {
                 string operand1 = Math.Sqrt(float.Parse(calcOperandPart1)).ToString();
                 setOperandPart1(operand1);
@@ -340,11 +356,11 @@ namespace WindowsCalculator
 
         private void updatePercentageOutPut()
         {
-            if (!isFirstOperationApplied)
+            if (!isFirstBasicOperationApplied)
             {
                 setOutput1(ZERO_TEXT);
             }
-            if (isFirstOperationApplied)
+            if (isFirstBasicOperationApplied)
             {
                 setOutput(calcOperandPart2, calcOperandPart1 + " " + calcOperator1 + " " + calcOperandPart2);
             }
@@ -352,7 +368,7 @@ namespace WindowsCalculator
 
         private void updatePercentageOperand()
         {
-            if (isFirstOperationApplied)
+            if (isFirstBasicOperationApplied)
             {
                 if (calcOperandPart2.Equals(StringUtil.EMPTY_STRING))
                 {
@@ -394,9 +410,9 @@ namespace WindowsCalculator
 
         private void setOperation(String buttonText)
         {
-            if (!isFirstOperationApplied)
+            if (!isFirstBasicOperationApplied)
             {
-                isFirstOperationApplied = true;
+                isFirstBasicOperationApplied = true;
                 setOperator1(buttonText);
             }
             else
@@ -409,7 +425,7 @@ namespace WindowsCalculator
         }
         private void setOperationOutput1()
         {
-            if (!isFirstOperationApplied)
+            if (!isFirstBasicOperationApplied)
             {
                 setOutput(calcOperandPart1, calcOperandPart1 + " " + calcOperator1 + " ");
             }
@@ -421,7 +437,7 @@ namespace WindowsCalculator
 
         private void setOperationOutput2()
         {
-            if (isFirstOperationApplied)
+            if (isFirstBasicOperationApplied)
             {
                 setOutput2(calcOperandPart1 + " " + calcOperator1 + " ");
             }
@@ -430,7 +446,7 @@ namespace WindowsCalculator
 
         private void eraseLastOutput1()
         {
-            if (!isFirstOperationApplied)
+            if (!isFirstBasicOperationApplied)
             {
                 if (calcOperandPart1.Length == 0) return;
                 setOutput1(calcOperandPart1);
@@ -444,7 +460,8 @@ namespace WindowsCalculator
 
         private void setEraseLastLetterOperand()
         {
-            if (!isFirstOperationApplied)
+            if (!isErasableOperatorOutput) return;
+            if (!isFirstBasicOperationApplied)
             {
                 if (calcOperandPart1.Length == 0) return;
                 setOperandPart1(CalculatorUtil.removeLastCharacterFromString(calcOperandPart1));
@@ -460,13 +477,13 @@ namespace WindowsCalculator
         {
             resetOperator();
             resetOperand();
-            isFirstOperationApplied = false;
+            isFirstBasicOperationApplied = false;
 
         }
 
         private void resetOperandAndOutPut1()
         {
-            if (!isFirstOperationApplied)
+            if (!isFirstBasicOperationApplied)
             {
                 resetOperand1();
                 resetOutPut1();
