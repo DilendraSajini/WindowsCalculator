@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
+using WindowsCalculator;
 
-namespace WindowsCalculator.UnitTests
+namespace CalculatorTestProject.WindowsCalculator
 {
     [TestFixture]
     public class CalculatorFormTestSquaredClick

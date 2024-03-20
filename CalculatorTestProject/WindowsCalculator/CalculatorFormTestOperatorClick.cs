@@ -1,11 +1,12 @@
 ﻿using NUnit.Framework;
+using WindowsCalculator;
 
-namespace WindowsCalculator.UnitTests
+namespace CalculatorTestProject.WindowsCalculator
 {
     [TestFixture]
     public class CalculatorFormTestOperatorClick
     {
-       
+
         [TestCase("0", "1", "+", ExpectedResult = "1")]
         [TestCase("1", "2", "-", ExpectedResult = "2")]
         [TestCase("2", "3", "/", ExpectedResult = "3")]

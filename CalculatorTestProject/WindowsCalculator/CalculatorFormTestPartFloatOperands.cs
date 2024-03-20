@@ -1,12 +1,13 @@
 ﻿using NUnit.Framework;
+using WindowsCalculator;
 
-namespace WindowsCalculator.UnitTests
+namespace CalculatorTestProject.WindowsCalculator
 {
     [TestFixture]
     public class CalculatorFormTestPartFloatOperands
     {
         [TestCase("0", ".", "5", "1", "+", ExpectedResult = "1.5")]
-        public string testSingleFloatOperandsAndOperatorClick_shouldReturnValidOutput1(string operand1Part1,string opDot, string operand1Part2, string operand2, string op)
+        public string testSingleFloatOperandsAndOperatorClick_shouldReturnValidOutput1(string operand1Part1, string opDot, string operand1Part2, string operand2, string op)
         {
             CalculatorForm form = new CalculatorForm();
             form.operandButonClick(operand1Part1);

@@ -1,12 +1,12 @@
 ﻿using NUnit.Framework;
+using WindowsCalculator;
 
-namespace WindowsCalculator.UnitTests
+namespace CalculatorTestProject.WindowsCalculator
 {
     [TestFixture]
     public class CalculatorFormTestBackClick
     {
         [TestCase("", ExpectedResult = "")]
-
         public string testBackClickWithNOperand_shouldDoNothing(string operand1)
         {
             CalculatorForm form = new CalculatorForm();
@@ -28,10 +28,10 @@ namespace WindowsCalculator.UnitTests
             return form.Output1;
         }
 
-       [TestCase("07", "+", ExpectedResult = "07")]
-       [TestCase("13", "-", ExpectedResult = "13")]
-       [TestCase("25", "/", ExpectedResult = "25")]
-       [TestCase("36", "*", ExpectedResult = "36")]
+        [TestCase("07", "+", ExpectedResult = "07")]
+        [TestCase("13", "-", ExpectedResult = "13")]
+        [TestCase("25", "/", ExpectedResult = "25")]
+        [TestCase("36", "*", ExpectedResult = "36")]
         public string testBackClickWithFirstOperandMultipleCharacters_shouldEraceLastLetterOfOutput1(string operand1, string op)
         {
             CalculatorForm form = new CalculatorForm();

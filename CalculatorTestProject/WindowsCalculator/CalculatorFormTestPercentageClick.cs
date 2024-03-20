@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
+using WindowsCalculator;
 
-namespace WindowsCalculator.UnitTests
+namespace CalculatorTestProject.WindowsCalculator
 {
     [TestFixture]
     public class CalculatorFormTestPercentageClick
@@ -14,7 +15,7 @@ namespace WindowsCalculator.UnitTests
         {
             CalculatorForm form = new CalculatorForm();
             form.operandButonClick(operand1);
-            form.setPerClicked();
+            form.setPercentageClicked();
             return form.Output1;
         }
 
@@ -27,7 +28,7 @@ namespace WindowsCalculator.UnitTests
             CalculatorForm form = new CalculatorForm();
             form.operandButonClick(operand1);
             form.setOperationClick(op);
-            form.setPerClicked();
+            form.setPercentageClicked();
             return form.Output1;
         }
 
@@ -42,7 +43,7 @@ namespace WindowsCalculator.UnitTests
             form.operandButonClick(operand1);
             form.setOperationClick(op);
             form.operandButonClick(operand2);
-            form.setPerClicked();
+            form.setPercentageClicked();
             return form.Output1;
         }
 
@@ -56,7 +57,7 @@ namespace WindowsCalculator.UnitTests
             form.operandButonClick(operand1);
             form.setOperationClick(op);
             form.operandButonClick(operand2);
-            form.setPerClicked();
+            form.setPercentageClicked();
             return form.Output2;
         }
 

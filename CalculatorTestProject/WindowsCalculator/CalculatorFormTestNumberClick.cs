@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
+using WindowsCalculator;
 
-namespace WindowsCalculator.UnitTests
+namespace CalculatorTestProject.WindowsCalculator
 {
     [TestFixture]
     public class CalculatorFormTestNumberClick
@@ -15,7 +16,7 @@ namespace WindowsCalculator.UnitTests
         [TestCase("7", ExpectedResult = "7")]
         [TestCase("8", ExpectedResult = "8")]
         [TestCase("9", ExpectedResult = "9")]
-        public string testSingleNumberClick(string operand) 
+        public string testSingleNumberClick(string operand)
         {
             CalculatorForm form = new CalculatorForm();
             form.operandButonClick(operand);

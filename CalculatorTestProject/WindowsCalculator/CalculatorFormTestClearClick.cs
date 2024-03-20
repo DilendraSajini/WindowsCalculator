@@ -1,11 +1,12 @@
 ﻿using NUnit.Framework;
+using WindowsCalculator;
 
-namespace WindowsCalculator.UnitTests
+namespace CalculatorTestProject.WindowsCalculator
 {
     [TestFixture]
     public class CalculatorFormTestClearClick
     {
-     
+
         [TestCase("0", "1", "+", ExpectedResult = "")]
         [TestCase("1", "2", "-", ExpectedResult = "")]
         [TestCase("2", "3", "/", ExpectedResult = "")]
@@ -39,7 +40,7 @@ namespace WindowsCalculator.UnitTests
             return form.Output2;
         }
 
-    [TearDown]
+        [TearDown]
         public void TearDown()
         {
         }
