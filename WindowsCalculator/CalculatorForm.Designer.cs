@@ -65,7 +65,7 @@ namespace WindowsCalculator
             this.output1.Name = "output1";
             this.output1.Size = new System.Drawing.Size(229, 23);
             this.output1.TabIndex = 0;
-            this.output1.TextChanged += new System.EventHandler(this.textBox2TextChanged);
+            this.output1.TextChanged += output1_TextChanged;
             // 
             // button1
             // 
@@ -255,7 +255,7 @@ namespace WindowsCalculator
             this.buttonPer.TabIndex = 20;
             this.buttonPer.Text = "%";
             this.buttonPer.UseVisualStyleBackColor = true;
-            this.buttonPer.Click += new System.EventHandler(this.buttonPerClick);
+            this.buttonPer.Click += buttonPercentageClick;
             // 
             // output2
             // 
@@ -350,23 +350,20 @@ namespace WindowsCalculator
             this.Load += new System.EventHandler(this.Form1Load);
             this.ResumeLayout(false);
             this.PerformLayout();
-
+            this.KeyPress += handlerKeyPressInput;
             this.KeyPreview = true;
-            this.KeyPress += inputValidator;
         }
 
-        private void inputValidator(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = CalculatorUtil.isNumpadInput(e.KeyChar);
-            e.Handled =  CalculatorUtil.isValidInput(e.KeyChar);
-        }
         public string Output1
         {
             get { return output1.Text; }
+            set { output1.Text = value; }
         }
+
         public string Output2
         {
             get { return output2.Text; }
+            set { output2.Text = value; }
         }
         #endregion
 

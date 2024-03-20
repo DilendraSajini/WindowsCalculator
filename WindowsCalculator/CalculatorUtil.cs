@@ -1,53 +1,44 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
 namespace WindowsCalculator
 {
-    static class CalculatorUtil
+    public static class CalculatorUtil
     {
-        private const string ZERO_TEXT = "0";
+        private static readonly ILog log = LogManager.GetLogger(typeof(CalculatorUtil));
 
-        public static string getBackSpacedLastCharacter(string value)
+        public static string calculatePercentageWithTwoOperands(string value1, string value2, string op)
         {
-            if (value.Length == 1)
+            if (StringUtil.isValidSring(value1) && StringUtil.isValidSring(value2))
             {
-                return ZERO_TEXT;
+                float operand1 = float.Parse(value1);
+                float operand2 = float.Parse(value2);
+                switch (op)
+                {
+                    case "+":
+                    case "-":
+                        return ((operand2 * (operand1 / 100)).ToString());
+
+                    case "*":
+                    case "/":
+                        return ((operand2 / 100).ToString());
+                    default:
+                        log.Error("Error: Invalid operator. Please provide a valid operator (+, -, *, /).");
+                        throw new InvalidExpressionException();
+                }
             }
-            return value.Remove(value.Length - 1);
+            log.Error("Error: Invalid number format");
+            throw new InvalidExpressionException();
         }
 
-        public static double getSquared(float value)
+        public static string calculateBasicOperationWithTwoOperands(string value1, string value2, string op)
         {
-            return Math.Pow(value, 2);
-        }
-
-        public static string getPercentage(string value1, string value2, string op)
-        {
-            float operand1 = float.Parse(value1);
-            float operand2 = float.Parse(value2);
-            switch (op)
-            {
-                case "+":
-                case "-":
-                    return ((operand2 * (operand1 / 100)).ToString());
-
-                case "*":
-                case "/":
-                    return ((operand2 / 100).ToString());
-                default:
-                    Console.WriteLine("Error: Invalid operator. Please provide a valid operator (+, -, *, /).");
-                    return ZERO_TEXT;
-            }
-
-        }
-
-        public static string calculateWithSecondOperand(string value1, string value2, string op)
-        {
-            float result = 0;
-            if (!string.IsNullOrEmpty(value1) && !string.IsNullOrEmpty(value2) && !string.IsNullOrEmpty(op))
+            if (StringUtil.isValidSring(value1) && StringUtil.isValidSring(value2) && StringUtil.isValidSring(op))
             {
 
                 float operand1 = float.Parse(value1);
@@ -64,25 +55,25 @@ namespace WindowsCalculator
                     case "/":
                         if (operand2 == 0)
                         {
-                            Console.WriteLine("Error: Division by zero is not allowed.");
+                            log.Error("Error: Division by zero is not allowed.");
                             return "Cannot divide by zero";
                         }
-                        result = operand1 / operand2;
-                        return result.ToString();
+                        return (operand1 / operand2).ToString();
                     default:
-                        Console.WriteLine("Error: Invalid operator. Please provide a valid operator (+, -, *, /).");
-                        return result.ToString();
+                        log.Error("Error: Invalid operator. Please provide a valid operator (+, -, *, /).");
+                        throw new InvalidExpressionException();
 
                 }
             }
-            return result.ToString();
+            log.Error("Error: Invalid number format");
+            throw new InvalidExpressionException();
         }
 
-        public static string getSigned(string value)
+        public static string getSignedString(string value)
         {
-            if (value != ZERO_TEXT)
+            if (value != StringUtil.ZERO_TEXT)
             {
-                if (!string.IsNullOrEmpty(value))
+                if (StringUtil.isValidSring(value))
                 {
                     float operand1 = float.Parse(value);
                     float newOperand1 = operand1 * (-1);
@@ -92,49 +83,60 @@ namespace WindowsCalculator
             return value;
         }
 
-        public static Boolean isNumpadInput(char ch)
+        public static bool isValidNumpadInput(char ch, string text)
         {
-            if (!char.IsControl(ch) && !char.IsDigit(ch) &&
-                 (ch != '.'))
+            if (char.IsDigit(ch) || ch == '.' || char.IsControl(ch))
             {
-                return true;
-            }
-            return false;
-        }
+                string inputText = text + ch;
 
-        public static Boolean isValidInput(char ch)
-        {
-            if (char.IsDigit(ch) || ch == '.')
-            {
-                return true;
+                if (StringUtil.isValidDouble(inputText) && StringUtil.getDecimalCount(inputText) <= 1)
+                {
+                    return false;
+                }
             }
-            if (ch == '+' || ch == '-' || ch == '*' || ch == '/')
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public static Boolean isValidOperand(string value)
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                return false;
-            }
-
-            int decimalCount = Enumerable.Count(value, (c => c == '.'));
-
-            if (decimalCount > 2)
-            {
-                return false;
-            }
-            if (!double.TryParse(value, out _))
-            {
-                return false;
-            }
-
             return true;
         }
 
+        public static Boolean isValidCharacterInput(char ch)
+        {
+            if (isValidCharacterOperand(ch))
+            {
+                return true;
+            }
+            if (isvalidCharacterOperator(ch))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public static bool isvalidCharacterOperator(char ch)
+        {
+            return ch == '+' || ch == '-' || ch == '*' || ch == '/';
+        }
+
+        public static bool isValidCharacterOperand(char ch)
+        {
+            return char.IsDigit(ch) || ch == '.';
+        }
+
+        public static Boolean isValidStringOperand(string value)
+        {
+            return StringUtil.isValidSring(value) && StringUtil.getDecimalCount(value) <= 2 && StringUtil.isValidDouble(value);
+        }
+
+        public static string removeLastCharacterFromString(string value)
+        {
+            if (value.Length == 1)
+            {
+                return StringUtil.ZERO_TEXT;
+            }
+            return value.Remove(value.Length - 1);
+        }
+
+        public static double calculateSquare(double value)
+        {
+            return Math.Pow(value, 2);
+        }
     }
 }
