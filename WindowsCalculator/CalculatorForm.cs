@@ -22,6 +22,7 @@ namespace WindowsCalculator
         private Boolean isFirstBasicOperationApplied = false;
         private Boolean isErasableOperatorOutput = true;
         private Boolean isAllowedResetOutput = false;
+        private string backUpResetOutput = "";
         private const string ZERO_TEXT = "0";
 
         public CalculatorForm()
@@ -88,10 +89,13 @@ namespace WindowsCalculator
         public void setEqualClicked(String buttonText)
         {
             isErasableOperatorOutput = false;
+            if (string.IsNullOrEmpty(calcOperandPart1) && !string.IsNullOrEmpty(calcOperandPart2))
+            {
+                calcOperandPart1 = backUpResetOutput;
+            }
             updateEqualOutPut(buttonText);
             setOperandPart1(output1.Text);
             resetOperand2();
-            resetOperator1();
             isErasableOperatorOutput = true;
             isAllowedResetOutput = true;
 
@@ -100,7 +104,7 @@ namespace WindowsCalculator
         public void setOperationClick(String buttonText)
         {
             setOperation(buttonText);
-            setOperationOutput1();
+            setOperationOutput();
             setOperationOutput2();
         }
 
@@ -112,6 +116,7 @@ namespace WindowsCalculator
             isFirstBasicOperationApplied = false;
             isErasableOperatorOutput = true;
             isAllowedResetOutput = false;
+            backUpResetOutput = "";
         }
 
         public void eraseLastLetterOfOperand()
@@ -154,9 +159,8 @@ namespace WindowsCalculator
             }
             else if (CalculatorUtil.isvalidCharacterOperator(ch))
             {
-                checkValidToResetOutputAfterOperatorSet();
                 setOperation(input);
-                setOperationOutput1();
+                setOperationOutput();
             }
             else
             {
@@ -185,8 +189,14 @@ namespace WindowsCalculator
         {
             if (isAllowedResetOutput)
             {
+                backUpResetOutput = calcOperandPart1;
+                resetOperand1();
                 resetOutPut1();
                 isAllowedResetOutput = false;
+            }
+            else if (isFirstBasicOperationApplied)
+            {
+                resetOutPut1();
             }
         }
 
@@ -469,10 +479,11 @@ namespace WindowsCalculator
                 setOperandPart1(CalculatorUtil.calculateBasicOperationWithTwoOperands(calcOperandPart1, calcOperandPart2, calcOperator1));
                 resetOperand2();
                 setOperator1(calcOperator2);
+                isFirstBasicOperationApplied = true;
                 resetOperator2();
             }
         }
-        private void setOperationOutput1()
+        private void setOperationOutput()
         {
             if (!isFirstBasicOperationApplied)
             {
@@ -481,6 +492,7 @@ namespace WindowsCalculator
             else
             {
                 setOutput2(calcOperandPart1 + " " + calcOperator1 + " ");
+                setOutput1(calcOperandPart1);
             }
         }
 
@@ -594,11 +606,6 @@ namespace WindowsCalculator
             calcOperator2 = value;
         }
 
-        private void resetOutPut1()
-        {
-            setOutput1("");
-        }
-
         private void resetOperator()
         {
             resetOperator1();
@@ -626,5 +633,11 @@ namespace WindowsCalculator
             resetOutPut1();
             resetOutPut2();
         }
+
+        private void resetOutPut1()
+        {
+            setOutput1("");
+        }
+
     }
 }

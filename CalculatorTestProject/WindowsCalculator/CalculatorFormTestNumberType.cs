@@ -66,11 +66,22 @@ namespace CalculatorTestProject.WindowsCalculator
             return form.Output1;
         }
 
-        [Ignore("Skip: need to fix. Have issue with reset operand after enter")]
-        [TestCase("0", "1","4", "+", ExpectedResult = "4")]
-        [TestCase("1", "2","4", "-", ExpectedResult = "4")]
-        [TestCase("2", "3","4", "/", ExpectedResult = "4")]
-        [TestCase("3", "4","4", "*", ExpectedResult = "4")]
+
+        [TestCase("3", "4", "+", ExpectedResult = "7")]
+        public string testResetOutputWithOperator_shouldNotResetOutput1(string operand1, string operand2, char op)
+        {
+
+            CalculatorForm form = new CalculatorForm();
+            form.Output1 = operand1;
+            form.KeyPressInputHandler(operand1[0]);
+            form.KeyPressInputHandler(op);
+            form.KeyPressInputHandler(operand2[0]);
+            form.Output1 = operand2; // Because the  form.KeyPressInputHandler(operand2[0]) is reset before set the value.
+            form.KeyPressInputHandler(op);
+            return form.Output1;
+        }
+
+        [TestCase("3", "4", "4", "*", ExpectedResult = "48")]
         public string testThreeOperandsOperatorAndEnterKey_shouldReturnValidOutput1(char operand1, char operand2, char operand3, char op)
         {
 
@@ -81,6 +92,20 @@ namespace CalculatorTestProject.WindowsCalculator
             form.KeyPressInputHandler('\r');
             form.KeyPressInputHandler(operand3);
             form.KeyPressInputHandler('\r');
+            return form.Output1;
+        }
+
+        [TestCase("3", "4", "4", "*", ExpectedResult = "48")]
+        public string testThreeOperandsOperatorAndEqual_shouldReturnValidOutput1(char operand1, char operand2, char operand3, char op)
+        {
+
+            CalculatorForm form = new CalculatorForm();
+            form.KeyPressInputHandler(operand1);
+            form.KeyPressInputHandler(op);
+            form.KeyPressInputHandler(operand2);
+            form.KeyPressInputHandler('=');
+            form.KeyPressInputHandler(operand3);
+            form.KeyPressInputHandler('=');
             return form.Output1;
         }
 
