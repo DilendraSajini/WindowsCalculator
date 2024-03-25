@@ -14,8 +14,8 @@ namespace CalculatorTestProject.WindowsCalculator
         public string testOperandClick_shouldReturnValidOutput1(string operand1)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand1);
-            form.setReciprocalClicked();
+            form.OperandButonClick(operand1);
+            form.ReciprocalButtonClicked();
             return form.Output1;
         }
 

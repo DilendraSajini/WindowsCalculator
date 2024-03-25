@@ -97,7 +97,7 @@ namespace WindowsCalculator
             return true;
         }
 
-        public static Boolean isValidCharacterInput(char ch)
+        public static bool isValidCharacterInput(char ch)
         {
             if (isValidCharacterOperand(ch))
             {
@@ -120,7 +120,7 @@ namespace WindowsCalculator
             return char.IsDigit(ch) || ch == '.';
         }
 
-        public static Boolean isValidStringOperand(string value)
+        public static bool isValidStringOperand(string value)
         {
             return StringUtil.isValidSring(value) && StringUtil.getDecimalCount(value) <= 2 && StringUtil.isValidDouble(value);
         }

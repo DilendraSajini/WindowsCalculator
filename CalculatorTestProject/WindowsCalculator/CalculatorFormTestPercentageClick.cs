@@ -14,8 +14,8 @@ namespace CalculatorTestProject.WindowsCalculator
         public string testSingleOperandClick_shouldReturnValidOutput1(string operand1)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand1);
-            form.setPercentageClicked();
+            form.OperandButonClick(operand1);
+            form.PercentageButtonClicked();
             return form.Output1;
         }
 
@@ -26,9 +26,9 @@ namespace CalculatorTestProject.WindowsCalculator
         public string testOneOperandsAndOperatorClick_shouldReturnValidOutput1(string operand1, string op)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand1);
-            form.setOperationClick(op);
-            form.setPercentageClicked();
+            form.OperandButonClick(operand1);
+            form.OperationsClick(op);
+            form.PercentageButtonClicked();
             return form.Output1;
         }
 
@@ -40,10 +40,10 @@ namespace CalculatorTestProject.WindowsCalculator
         public string testTwoOperandsAndOperatorClick_shouldReturnValidOutput1(string operand1, string operand2, string op)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand1);
-            form.setOperationClick(op);
-            form.operandButonClick(operand2);
-            form.setPercentageClicked();
+            form.OperandButonClick(operand1);
+            form.OperationsClick(op);
+            form.OperandButonClick(operand2);
+            form.PercentageButtonClicked();
             return form.Output1;
         }
 
@@ -54,10 +54,10 @@ namespace CalculatorTestProject.WindowsCalculator
         public string testTwoOperandsAndOperatorClick_shouldReturnValidOutput2(string operand1, string operand2, string op)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand1);
-            form.setOperationClick(op);
-            form.operandButonClick(operand2);
-            form.setPercentageClicked();
+            form.OperandButonClick(operand1);
+            form.OperationsClick(op);
+            form.OperandButonClick(operand2);
+            form.PercentageButtonClicked();
             return form.Output2;
         }
 

@@ -11,10 +11,10 @@ namespace CalculatorTestProject.WindowsCalculator
         public string testCEClickWithMultipleOperands_shouldCleanOutput1(string operand1, string operand2, string operand3)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand1);
-            form.operandButonClick(operand2);
-            form.operandButonClick(operand3);
-            form.resetCalculator();
+            form.OperandButonClick(operand1);
+            form.OperandButonClick(operand2);
+            form.OperandButonClick(operand3);
+            form.ResetCalculator();
             return form.Output1;
         }
 
@@ -22,9 +22,9 @@ namespace CalculatorTestProject.WindowsCalculator
         public string testCEClickWithOneOperandsAndOperatorClick_shouldCleanOutput1(string operand1, string op)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand1);
-            form.setOperationClick(op);
-            form.resetCalculator();
+            form.OperandButonClick(operand1);
+            form.OperationsClick(op);
+            form.ResetCalculator();
             return form.Output1;
         }
 
@@ -32,10 +32,10 @@ namespace CalculatorTestProject.WindowsCalculator
         public string testCEClickWithTwoOperandsAndOperatorClick_shouldCleanOutput1(string operand1, string operand2, string op)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand1);
-            form.setOperationClick(op);
-            form.operandButonClick(operand2);
-            form.resetCalculator();
+            form.OperandButonClick(operand1);
+            form.OperationsClick(op);
+            form.OperandButonClick(operand2);
+            form.ResetCalculator();
             return form.Output1;
         }
 

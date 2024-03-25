@@ -19,7 +19,7 @@ namespace CalculatorTestProject.WindowsCalculator
         public string testSingleNumberClick(string operand)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand);
+            form.OperandButonClick(operand);
             return form.Output1;
         }
 
@@ -36,8 +36,8 @@ namespace CalculatorTestProject.WindowsCalculator
         public string testSingleNumberWithSignClick(string operand)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand);
-            form.setSignClicked("-");
+            form.OperandButonClick(operand);
+            form.SignButtonClicked("-");
             return form.Output1;
         }
 
@@ -54,9 +54,9 @@ namespace CalculatorTestProject.WindowsCalculator
         public string testSingleNumberWithDoubleSignClick(string operand)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand);
-            form.setSignClicked("-");
-            form.setSignClicked("-");
+            form.OperandButonClick(operand);
+            form.SignButtonClicked("-");
+            form.SignButtonClicked("-");
             return form.Output1;
         }
 
@@ -73,8 +73,8 @@ namespace CalculatorTestProject.WindowsCalculator
         public string testMultipleNumbersClick(string operand1, string operand2)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand1);
-            form.operandButonClick(operand2);
+            form.OperandButonClick(operand1);
+            form.OperandButonClick(operand2);
             return form.Output1;
         }
 
@@ -83,9 +83,9 @@ namespace CalculatorTestProject.WindowsCalculator
         public string testInvalidInPut(string operand1, string operand2, string operand3)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand1);
-            form.operandButonClick(operand2);
-            form.operandButonClick(operand3);
+            form.OperandButonClick(operand1);
+            form.OperandButonClick(operand2);
+            form.OperandButonClick(operand3);
             return form.Output1;
         }
 

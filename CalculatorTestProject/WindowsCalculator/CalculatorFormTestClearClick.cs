@@ -15,11 +15,11 @@ namespace CalculatorTestProject.WindowsCalculator
         public string testClearClick_shouldCleanOutput1(string operand1, string operand2, string op)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand1);
-            form.setOperationClick(op);
-            form.operandButonClick(operand2);
-            form.setEqualClicked("=");
-            form.resetCalculator();
+            form.OperandButonClick(operand1);
+            form.OperationsClick(op);
+            form.OperandButonClick(operand2);
+            form.EqualButtonClicked("=");
+            form.ResetCalculator();
             return form.Output1;
         }
 
@@ -32,11 +32,11 @@ namespace CalculatorTestProject.WindowsCalculator
         public string testClearClick_shouldCleanOutput2(string operand1, string operand2, string op)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand1);
-            form.setOperationClick(op);
-            form.operandButonClick(operand2);
-            form.setEqualClicked("=");
-            form.resetCalculator();
+            form.OperandButonClick(operand1);
+            form.OperationsClick(op);
+            form.OperandButonClick(operand2);
+            form.EqualButtonClicked("=");
+            form.ResetCalculator();
             return form.Output2;
         }
 

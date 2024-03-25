@@ -10,12 +10,12 @@ namespace CalculatorTestProject.WindowsCalculator
         public string testSingleFloatOperandsAndOperatorClick_shouldReturnValidOutput1(string operand1Part1, string opDot, string operand1Part2, string operand2, string op)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand1Part1);
-            form.operandButonClick(opDot);
-            form.operandButonClick(operand1Part2);
-            form.setOperationClick(op);
-            form.operandButonClick(operand2);
-            form.setEqualClicked("=");
+            form.OperandButonClick(operand1Part1);
+            form.OperandButonClick(opDot);
+            form.OperandButonClick(operand1Part2);
+            form.OperationsClick(op);
+            form.OperandButonClick(operand2);
+            form.EqualButtonClicked("=");
             return form.Output1;
         }
 
@@ -23,12 +23,12 @@ namespace CalculatorTestProject.WindowsCalculator
         public string testSingleFloatOperandsAndOperatorClick_shouldReturnValidOutput2(string operand1Part1, string opDot, string operand1Part2, string operand2, string op)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand1Part1);
-            form.operandButonClick(opDot);
-            form.operandButonClick(operand1Part2);
-            form.setOperationClick(op);
-            form.operandButonClick(operand2);
-            form.setEqualClicked("=");
+            form.OperandButonClick(operand1Part1);
+            form.OperandButonClick(opDot);
+            form.OperandButonClick(operand1Part2);
+            form.OperationsClick(op);
+            form.OperandButonClick(operand2);
+            form.EqualButtonClicked("=");
             return form.Output2;
         }
 
@@ -36,14 +36,14 @@ namespace CalculatorTestProject.WindowsCalculator
         public string testFloatOperandsAndOperatorClick_shouldReturnValidOutput1(string operand1Part1, string opDot, string operand1Part2, string operand2Part1, string op)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand1Part1);
-            form.operandButonClick(opDot);
-            form.operandButonClick(operand1Part2);
-            form.setOperationClick(op);
-            form.operandButonClick(operand2Part1);
-            form.operandButonClick(opDot);
-            form.operandButonClick(operand1Part2);
-            form.setEqualClicked("=");
+            form.OperandButonClick(operand1Part1);
+            form.OperandButonClick(opDot);
+            form.OperandButonClick(operand1Part2);
+            form.OperationsClick(op);
+            form.OperandButonClick(operand2Part1);
+            form.OperandButonClick(opDot);
+            form.OperandButonClick(operand1Part2);
+            form.EqualButtonClicked("=");
             return form.Output1;
         }
 
@@ -51,14 +51,14 @@ namespace CalculatorTestProject.WindowsCalculator
         public string testFloatOperandsAndOperatorClick_shouldReturnValidOutput2(string operand1Part1, string opDot, string operand1Part2, string operand2Part1, string op)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand1Part1);
-            form.operandButonClick(opDot);
-            form.operandButonClick(operand1Part2);
-            form.setOperationClick(op);
-            form.operandButonClick(operand2Part1);
-            form.operandButonClick(opDot);
-            form.operandButonClick(operand1Part2);
-            form.setEqualClicked("=");
+            form.OperandButonClick(operand1Part1);
+            form.OperandButonClick(opDot);
+            form.OperandButonClick(operand1Part2);
+            form.OperationsClick(op);
+            form.OperandButonClick(operand2Part1);
+            form.OperandButonClick(opDot);
+            form.OperandButonClick(operand1Part2);
+            form.EqualButtonClicked("=");
             return form.Output2;
         }
 
@@ -66,15 +66,15 @@ namespace CalculatorTestProject.WindowsCalculator
         public string testDuplicateFloatOperandsAndOperatorClick_shouldReturnValidOutput1(string operand1Part1, string opDot, string operand1Part2, string operand2Part1, string op)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand1Part1);
-            form.operandButonClick(opDot);
-            form.operandButonClick(opDot);
-            form.operandButonClick(operand1Part2);
-            form.setOperationClick(op);
-            form.operandButonClick(operand2Part1);
-            form.operandButonClick(opDot);
-            form.operandButonClick(operand1Part2);
-            form.setEqualClicked("=");
+            form.OperandButonClick(operand1Part1);
+            form.OperandButonClick(opDot);
+            form.OperandButonClick(opDot);
+            form.OperandButonClick(operand1Part2);
+            form.OperationsClick(op);
+            form.OperandButonClick(operand2Part1);
+            form.OperandButonClick(opDot);
+            form.OperandButonClick(operand1Part2);
+            form.EqualButtonClicked("=");
             return form.Output1;
         }
 

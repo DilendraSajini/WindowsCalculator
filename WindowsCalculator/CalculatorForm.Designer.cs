@@ -350,7 +350,7 @@ namespace WindowsCalculator
             this.Name = "CalculatorForm";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1Load);
-            this.KeyPress += handlerKeyPressInput;
+            this.KeyPress += HandleKeyPressInput;
             this.ResumeLayout(false);
             this.PerformLayout();
 

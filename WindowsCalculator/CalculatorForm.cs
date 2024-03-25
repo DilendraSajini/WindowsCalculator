@@ -16,12 +16,12 @@ namespace WindowsCalculator
         private static readonly ILog log = LogManager.GetLogger(typeof(CalculatorForm));
 
         private string calcOperandPart1 = "";
-        private String calcOperandPart2 = "";
+        private string calcOperandPart2 = "";
         private string calcOperator1 = "";
         private string calcOperator2 = "";
-        private Boolean isFirstBasicOperationApplied = false;
-        private Boolean isErasableOperatorOutput = true;
-        private Boolean isAllowedResetOutput = false;
+        private bool isFirstBasicOperationApplied = false;
+        private bool isErasableOperatorOutput = true;
+        private bool isAllowedResetOutput = false;
         private string backUpResetOutput = "";
         private const string ZERO_TEXT = "0";
 
@@ -30,7 +30,7 @@ namespace WindowsCalculator
             InitializeComponent();
         }
 
-        public void operandButonClick(String buttonText)
+        public void OperandButonClick(string buttonText)
         {
             try
             {
@@ -44,7 +44,7 @@ namespace WindowsCalculator
         }
 
 
-        public void setSignClicked(string buttonText)
+        public void SignButtonClicked(string buttonText)
         {
             updateSignOperand();
             updateOperandOutPut1();
@@ -57,14 +57,14 @@ namespace WindowsCalculator
             updateOperandOutPut1();
         }
 
-        public void setSquareRootClicked()
+        public void SquareRootButtonClicked()
         {
             isErasableOperatorOutput = false;
             updateSquareRootOperand();
             updateOperandOutPut1();
         }
 
-        public void setReciprocalClicked()
+        public void ReciprocalButtonClicked()
         {
             isErasableOperatorOutput = false;
             if (calcOperandPart1.Equals(ZERO_TEXT))
@@ -79,14 +79,14 @@ namespace WindowsCalculator
 
         }
 
-        public void setPercentageClicked()
+        public void PercentageButtonClicked()
         {
             isErasableOperatorOutput = false;
             updatePercentageOperand();
             updatePercentageOutPut();
         }
 
-        public void setEqualClicked(String buttonText)
+        public void EqualButtonClicked(string buttonText)
         {
             isErasableOperatorOutput = false;
             if (string.IsNullOrEmpty(calcOperandPart1) && !string.IsNullOrEmpty(calcOperandPart2))
@@ -101,14 +101,14 @@ namespace WindowsCalculator
 
         }
 
-        public void setOperationClick(String buttonText)
+        public void OperationsClick(string buttonText)
         {
             setOperation(buttonText);
             setOperationOutput();
             setOperationOutput2();
         }
 
-        public void resetCalculator()
+        public void ResetCalculator()
         {
             resetOutPut();
             resetOperator();
@@ -119,34 +119,10 @@ namespace WindowsCalculator
             backUpResetOutput = "";
         }
 
-        public void eraseLastLetterOfOperand()
+        public void EraseLastLetterOfOperand()
         {
-            setEraseLastLetterOperand();
+            eraseLastLetterOperand();
             eraseLastOutput1();
-        }
-
-        public void setEraseLastLetterOperand()
-        {
-            if (!isErasableOperatorOutput) return;
-            if (!isFirstBasicOperationApplied)
-            {
-                if (calcOperandPart1.Length == 0) return;
-                setOperandPart1(CalculatorUtil.removeLastCharacterFromString(calcOperandPart1));
-            }
-            else
-            {
-                if (calcOperandPart2.Length == 0) return;
-                setOperandPart2(CalculatorUtil.removeLastCharacterFromString(calcOperandPart2));
-            }
-        }
-
-        public void handlerKeyPressInput(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = CalculatorUtil.isValidNumpadInput(e.KeyChar, output1.Text);
-            if (sender is CalculatorForm)
-            {
-                KeyPressInputHandler(e.KeyChar);
-            }
         }
 
         public void KeyPressInputHandler(char ch)
@@ -168,13 +144,13 @@ namespace WindowsCalculator
                 {
                     case '=':
                     case '\r':
-                        setEqualClicked(input);
+                        EqualButtonClicked(input);
                         break;
                     case '%':
                         updatePercentageOperand();
                         break;
                     case '\b':
-                        eraseLastLetterOfOperand();
+                        EraseLastLetterOfOperand();
                         break;
                     default:
                         log.Error("Error: Invalid operator. Please provide a valid operator (+, -, *, /).");
@@ -185,6 +161,29 @@ namespace WindowsCalculator
             }
         }
 
+        protected void HandleKeyPressInput(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = CalculatorUtil.isValidNumpadInput(e.KeyChar, output1.Text);
+            if (sender is CalculatorForm)
+            {
+                KeyPressInputHandler(e.KeyChar);
+            }
+        }
+
+        private void eraseLastLetterOperand()
+        {
+            if (!isErasableOperatorOutput) return;
+            if (!isFirstBasicOperationApplied)
+            {
+                if (calcOperandPart1.Length == 0) return;
+                setOperandPart1(CalculatorUtil.removeLastCharacterFromString(calcOperandPart1));
+            }
+            else
+            {
+                if (calcOperandPart2.Length == 0) return;
+                setOperandPart2(CalculatorUtil.removeLastCharacterFromString(calcOperandPart2));
+            }
+        }
         private void checkValidToResetOutputBeforeOperandSet()
         {
             if (isAllowedResetOutput)
@@ -219,39 +218,39 @@ namespace WindowsCalculator
 
         private void button1Click(object sender, EventArgs e)
         {
-            operandButonClick(button1.Text);
+            OperandButonClick(button1.Text);
         }
         private void button2Click(object sender, EventArgs e)
         {
-            operandButonClick(button2.Text);
+            OperandButonClick(button2.Text);
         }
         private void button3Click(object sender, EventArgs e)
         {
-            operandButonClick(button3.Text);
+            OperandButonClick(button3.Text);
         }
         private void button4Click(object sender, EventArgs e)
         {
-            operandButonClick(button4.Text);
+            OperandButonClick(button4.Text);
         }
         private void button5Click(object sender, EventArgs e)
         {
-            operandButonClick(button5.Text);
+            OperandButonClick(button5.Text);
         }
         private void button6Click(object sender, EventArgs e)
         {
-            operandButonClick(button6.Text);
+            OperandButonClick(button6.Text);
         }
         private void button7Click(object sender, EventArgs e)
         {
-            operandButonClick(button7.Text);
+            OperandButonClick(button7.Text);
         }
         private void button8Click(object sender, EventArgs e)
         {
-            operandButonClick(button8.Text);
+            OperandButonClick(button8.Text);
         }
         private void button9Click(object sender, EventArgs e)
         {
-            operandButonClick(button9.Text);
+            OperandButonClick(button9.Text);
         }
         private void Form1Load(object sender, EventArgs e)
         {
@@ -260,17 +259,17 @@ namespace WindowsCalculator
 
         private void buttonDotClick(object sender, EventArgs e)
         {
-            operandButonClick(buttonDot.Text);
+            OperandButonClick(buttonDot.Text);
         }
 
         private void buttonZeroClick(object sender, EventArgs e)
         {
-            operandButonClick(buttonZero.Text);
+            OperandButonClick(buttonZero.Text);
         }
 
         private void buttonSignClick(object sender, EventArgs e)
         {
-            setSignClicked(buttonSign.Text);
+            SignButtonClicked(buttonSign.Text);
         }
 
         private void buttonSubClick(object sender, EventArgs e)
@@ -295,12 +294,12 @@ namespace WindowsCalculator
 
         private void buttonClearClick(object sender, EventArgs e)
         {
-            resetCalculator();
+            ResetCalculator();
         }
 
         private void buttonEquClick(object sender, EventArgs e)
         {
-            setEqualClicked(buttonEqu);
+            EqualButtonClicked(buttonEqu);
         }
 
         private void buttonCEClick(object sender, EventArgs e)
@@ -310,12 +309,12 @@ namespace WindowsCalculator
 
         private void buttonReciprocalClick(object sender, EventArgs e)
         {
-            setReciprocalClicked();
+            ReciprocalButtonClicked();
         }
 
         private void buttonSquareRootClick(object sender, EventArgs e)
         {
-            setSquareRootClicked();
+            SquareRootButtonClicked();
         }
 
         private void buttonSquaredClick(object sender, EventArgs e)
@@ -325,14 +324,14 @@ namespace WindowsCalculator
 
         private void buttonBackClick(object sender, EventArgs e)
         {
-            eraseLastLetterOfOperand();
+            EraseLastLetterOfOperand();
         }
 
         private void buttonPercentageClick(object sender, EventArgs e)
         {
             try
             {
-                setPercentageClicked();
+                PercentageButtonClicked();
             }
             catch
             {
@@ -439,9 +438,9 @@ namespace WindowsCalculator
             }
         }
 
-        private void setEqualClicked(Button button)
+        private void EqualButtonClicked(Button button)
         {
-            setEqualClicked(button.Text);
+            EqualButtonClicked(button.Text);
         }
 
 
@@ -463,10 +462,10 @@ namespace WindowsCalculator
 
         private void setOperationClicked(Button button)
         {
-            setOperationClick(button.Text);
+            OperationsClick(button.Text);
         }
 
-        private void setOperation(String buttonText)
+        private void setOperation(string buttonText)
         {
             if (!isFirstBasicOperationApplied)
             {
@@ -576,7 +575,7 @@ namespace WindowsCalculator
             resetOperand2();
         }
 
-        private void setOperandPart1(String operand)
+        private void setOperandPart1(string operand)
         {
             if (CalculatorUtil.isValidStringOperand(operand))
             {
@@ -584,7 +583,7 @@ namespace WindowsCalculator
             }
         }
 
-        private void setOperandPart2(String operand)
+        private void setOperandPart2(string operand)
         {
             if (CalculatorUtil.isValidStringOperand(operand))
             {

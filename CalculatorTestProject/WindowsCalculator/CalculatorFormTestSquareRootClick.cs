@@ -15,8 +15,8 @@ namespace CalculatorTestProject.WindowsCalculator
         public string testOperandClick_shouldReturnValidOutput1(string operand1)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand1);
-            form.setSquareRootClicked();
+            form.OperandButonClick(operand1);
+            form.SquareRootButtonClicked();
             return form.Output1;
         }
 
@@ -28,9 +28,9 @@ namespace CalculatorTestProject.WindowsCalculator
         public string testOperandAndMultipleOperatorClick_shouldReturnValidOutput1(string operand1)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand1);
-            form.setSquareRootClicked();
-            form.setSquareRootClicked();
+            form.OperandButonClick(operand1);
+            form.SquareRootButtonClicked();
+            form.SquareRootButtonClicked();
             return form.Output1;
         }
 

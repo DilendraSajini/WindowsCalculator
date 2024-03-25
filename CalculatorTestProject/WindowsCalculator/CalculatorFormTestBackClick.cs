@@ -10,8 +10,8 @@ namespace CalculatorTestProject.WindowsCalculator
         public string testBackClickWithNOperand_shouldReturnEmptyOutput1(string operand1)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand1);
-            form.eraseLastLetterOfOperand();
+            form.OperandButonClick(operand1);
+            form.EraseLastLetterOfOperand();
             return form.Output1;
         }
 
@@ -19,9 +19,9 @@ namespace CalculatorTestProject.WindowsCalculator
         public string testBackClickWithZeroOperand_shouldNotUpdateOutput1(string operand1)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand1);
+            form.OperandButonClick(operand1);
             string outputBeforeApplyOperator = form.Output1;
-            form.eraseLastLetterOfOperand();
+            form.EraseLastLetterOfOperand();
             Assert.AreEqual(outputBeforeApplyOperator, form.Output1);
             return form.Output1;
         }
@@ -31,9 +31,9 @@ namespace CalculatorTestProject.WindowsCalculator
         public string testBackClickWithOperand_shouldUpdateOutput1(string operand1)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand1);
+            form.OperandButonClick(operand1);
             string outputBeforeApplyOperator = form.Output1;
-            form.eraseLastLetterOfOperand();
+            form.EraseLastLetterOfOperand();
             Assert.AreNotEqual(outputBeforeApplyOperator, form.Output1);
             return form.Output1;
         }
@@ -42,10 +42,10 @@ namespace CalculatorTestProject.WindowsCalculator
         public string testBackClickWithMultipleClicks_shouldUpdateOutput1(string operand1)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand1);
+            form.OperandButonClick(operand1);
             string outputBeforeApplyOperator = form.Output1;
-            form.eraseLastLetterOfOperand();
-            form.eraseLastLetterOfOperand();
+            form.EraseLastLetterOfOperand();
+            form.EraseLastLetterOfOperand();
             Assert.AreNotEqual(outputBeforeApplyOperator, form.Output1);
             return form.Output1;
         }
@@ -58,11 +58,11 @@ namespace CalculatorTestProject.WindowsCalculator
         public string testBackClickWithFirstOperandAndOperator_shouldNotChangeOutput1(string operand1, string op)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand1);
-            form.setOperationClick(op);
+            form.OperandButonClick(operand1);
+            form.OperationsClick(op);
             string outputBeforeApplyOperator = form.Output1;
             Assert.AreEqual(operand1, outputBeforeApplyOperator);
-            form.eraseLastLetterOfOperand();
+            form.EraseLastLetterOfOperand();
             Assert.AreEqual(outputBeforeApplyOperator, form.Output1);
             return form.Output1;
         }
@@ -74,11 +74,11 @@ namespace CalculatorTestProject.WindowsCalculator
         public string testBackClickWithFirstOperandAndOperatorMultipleCharacters_shouldNotChangeOutput1(string operand1, string op)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand1);
-            form.setOperationClick(op);
+            form.OperandButonClick(operand1);
+            form.OperationsClick(op);
             string outputBeforeApplyOperator = form.Output1;
             Assert.AreEqual(operand1, outputBeforeApplyOperator);
-            form.eraseLastLetterOfOperand();
+            form.EraseLastLetterOfOperand();
             Assert.AreEqual(outputBeforeApplyOperator, form.Output1);
             return form.Output1;
         }
@@ -90,10 +90,10 @@ namespace CalculatorTestProject.WindowsCalculator
         public string testBackClickWithFirstOperAndSquaredOperator_shouldNotChangeOutput1(string operand1)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand1);
+            form.OperandButonClick(operand1);
             form.setSquaredClicked();
             string outputBeforeApplyOperator = form.Output1;
-            form.eraseLastLetterOfOperand();
+            form.EraseLastLetterOfOperand();
             Assert.AreEqual(outputBeforeApplyOperator, form.Output1);
             return form.Output1;
         }
@@ -105,10 +105,10 @@ namespace CalculatorTestProject.WindowsCalculator
         public string testBackClickWithFirstOperandAndSquareRootOperator_shouldNotChangeOutput1(string operand1)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand1);
+            form.OperandButonClick(operand1);
             form.setSquaredClicked();
             string outputBeforeApplyOperator = form.Output1;
-            form.eraseLastLetterOfOperand();
+            form.EraseLastLetterOfOperand();
             Assert.AreEqual(outputBeforeApplyOperator, form.Output1);
             return form.Output1;
         }
@@ -121,12 +121,12 @@ namespace CalculatorTestProject.WindowsCalculator
         public string testBackClickWithSecondOperand_shouldEraceLastLetterOfOutput1(string operand1, string operand2, string op)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand1);
-            form.setOperationClick(op);
-            form.operandButonClick(operand2);
+            form.OperandButonClick(operand1);
+            form.OperationsClick(op);
+            form.OperandButonClick(operand2);
             string outputBeforeApplyOperator = form.Output1;
             Assert.AreEqual(operand2, outputBeforeApplyOperator);
-            form.eraseLastLetterOfOperand();
+            form.EraseLastLetterOfOperand();
             Assert.AreNotEqual(outputBeforeApplyOperator, form.Output1);
             return form.Output1;
         }
@@ -139,12 +139,12 @@ namespace CalculatorTestProject.WindowsCalculator
         public string testBackClickWithSecondOperandMultipleCharacters_shouldEraceLastLetterOfOutput1(string operand1, string operand2, string op)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand1);
-            form.setOperationClick(op);
-            form.operandButonClick(operand2);
+            form.OperandButonClick(operand1);
+            form.OperationsClick(op);
+            form.OperandButonClick(operand2);
             string outputBeforeApplyOperator = form.Output1;
             Assert.AreEqual(operand2, outputBeforeApplyOperator);
-            form.eraseLastLetterOfOperand();
+            form.EraseLastLetterOfOperand();
             Assert.AreNotEqual(outputBeforeApplyOperator, form.Output1);
             return form.Output1;
         }
@@ -157,13 +157,13 @@ namespace CalculatorTestProject.WindowsCalculator
         public string testBackClickWithSecondOperandMultipleCharacters_shouldEraceMultipleLetterOfOutput1(string operand1, string operand2, string op)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand1);
-            form.setOperationClick(op);
-            form.operandButonClick(operand2);
+            form.OperandButonClick(operand1);
+            form.OperationsClick(op);
+            form.OperandButonClick(operand2);
             string outputBeforeApplyOperator = form.Output1;
             Assert.AreEqual(operand2, outputBeforeApplyOperator);
-            form.eraseLastLetterOfOperand();
-            form.eraseLastLetterOfOperand();
+            form.EraseLastLetterOfOperand();
+            form.EraseLastLetterOfOperand();
             Assert.AreNotEqual(outputBeforeApplyOperator, form.Output1);
             return form.Output1;
         }
