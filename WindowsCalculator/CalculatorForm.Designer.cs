@@ -1,6 +1,4 @@
 ﻿
-using System.Windows.Forms;
-
 namespace WindowsCalculator
 {
     partial class CalculatorForm
