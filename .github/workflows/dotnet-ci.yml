@@ -38,7 +38,7 @@ jobs:
         reportgenerator `
           -reports:**/coverage.cobertura.xml `
           -targetdir:coveragereport `
-          -reporttypes:HtmlSummary
+          -reporttypes:Html
 
     - name: Upload test and coverage artifacts
       uses: actions/upload-artifact@v4
