@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
+using WindowsCalculator;
 
-namespace WindowsCalculator.UnitTests
+namespace CalculatorTestProject.WindowsCalculator
 {
     [TestFixture]
     public class CalculatorFormTestNumberClick
@@ -15,10 +16,10 @@ namespace WindowsCalculator.UnitTests
         [TestCase("7", ExpectedResult = "7")]
         [TestCase("8", ExpectedResult = "8")]
         [TestCase("9", ExpectedResult = "9")]
-        public string testSingleNumberClick(string operand) 
+        public string testSingleNumberClick(string operand)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand);
+            form.OperandButonClick(operand);
             return form.Output1;
         }
 
@@ -35,8 +36,8 @@ namespace WindowsCalculator.UnitTests
         public string testSingleNumberWithSignClick(string operand)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand);
-            form.setSignClicked("-");
+            form.OperandButonClick(operand);
+            form.SignButtonClicked("-");
             return form.Output1;
         }
 
@@ -53,9 +54,9 @@ namespace WindowsCalculator.UnitTests
         public string testSingleNumberWithDoubleSignClick(string operand)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand);
-            form.setSignClicked("-");
-            form.setSignClicked("-");
+            form.OperandButonClick(operand);
+            form.SignButtonClicked("-");
+            form.SignButtonClicked("-");
             return form.Output1;
         }
 
@@ -72,8 +73,19 @@ namespace WindowsCalculator.UnitTests
         public string testMultipleNumbersClick(string operand1, string operand2)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand1);
-            form.operandButonClick(operand2);
+            form.OperandButonClick(operand1);
+            form.OperandButonClick(operand2);
+            return form.Output1;
+        }
+
+        [TestCase("1", ".", ".", ExpectedResult = "1.")]
+        [TestCase("1", ".", "$", ExpectedResult = "1.")]
+        public string testInvalidInPut(string operand1, string operand2, string operand3)
+        {
+            CalculatorForm form = new CalculatorForm();
+            form.OperandButonClick(operand1);
+            form.OperandButonClick(operand2);
+            form.OperandButonClick(operand3);
             return form.Output1;
         }
 

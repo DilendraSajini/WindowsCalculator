@@ -1,10 +1,29 @@
 ﻿using NUnit.Framework;
+using WindowsCalculator;
 
-namespace WindowsCalculator.UnitTests
+namespace CalculatorTestProject.WindowsCalculator
 {
     [TestFixture]
     public class CalculatorFormTestEqualClick
     {
+
+        [TestCase("1", ExpectedResult = "1")]
+        public string testOneOperandAndEqualClick_shouldReturnValidOutput1(string operand1)
+        {
+            CalculatorForm form = new CalculatorForm();
+            form.OperandButonClick(operand1);
+            form.EqualButtonClicked("=");
+            return form.Output1;
+        }
+
+        [TestCase("1", ExpectedResult = "1 =")]
+        public string testOneOperandAndEqualClick_shouldReturnValidOutput2(string operand1)
+        {
+            CalculatorForm form = new CalculatorForm();
+            form.OperandButonClick(operand1);
+            form.EqualButtonClicked("=");
+            return form.Output2;
+        }
 
         [TestCase("0", "1", "+", ExpectedResult = "1")]
         [TestCase("1", "2", "-", ExpectedResult = "-1")]
@@ -14,10 +33,10 @@ namespace WindowsCalculator.UnitTests
         public string testTwoOperandsAndOperatorEqualClick_shouldReturnValidOutput1(string operand1, string operand2, string op)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand1);
-            form.setOperationClick(op);
-            form.operandButonClick(operand2);
-            form.setEqualClicked("=");
+            form.OperandButonClick(operand1);
+            form.OperationsClick(op);
+            form.OperandButonClick(operand2);
+            form.EqualButtonClicked("=");
             return form.Output1;
         }
 
@@ -29,10 +48,10 @@ namespace WindowsCalculator.UnitTests
         public string testTwoOperandsAndOperatorEqualClick_shouldReturnValidOutput2(string operand1, string operand2, string op)
         {
             CalculatorForm form = new CalculatorForm();
-            form.operandButonClick(operand1);
-            form.setOperationClick(op);
-            form.operandButonClick(operand2);
-            form.setEqualClicked("=");
+            form.OperandButonClick(operand1);
+            form.OperationsClick(op);
+            form.OperandButonClick(operand2);
+            form.EqualButtonClicked("=");
             return form.Output2;
         }
 

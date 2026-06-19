@@ -1,0 +1,31 @@
+# Ignore Visual Studio files
+.vs/
+*.suo
+*.user
+*.sln.docstates
+
+# Ignore NuGet package directory
+packages/
+
+# Ignore build output directories
+bin/
+obj/
+
+# Ignore ReSharper files
+_ReSharper*
+
+# Ignore Rider files
+.idea/
+
+# Ignore build artifacts
+*.exe
+*.pdb
+*.dll
+*.zip
+
+# Ignore log files
+*.log
+
+# Ignore Mac OS and Windows file system files
+.DS_Store
+Thumbs.db
