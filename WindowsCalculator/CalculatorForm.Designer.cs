@@ -346,7 +346,7 @@ namespace WindowsCalculator
             this.Controls.Add(this.output1);
             this.KeyPreview = true;
             this.Name = "CalculatorForm";
-            this.Text = "Form1";
+            this.Text = "Calculator";
             this.Load += new System.EventHandler(this.Form1Load);
             this.KeyPress += HandleKeyPressInput;
             this.ResumeLayout(false);
