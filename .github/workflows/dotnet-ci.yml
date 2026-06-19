@@ -48,4 +48,3 @@ jobs:
         path: |
           **/*.trx
           coveragereport/**
-What this gives you
