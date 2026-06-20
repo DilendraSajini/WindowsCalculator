@@ -11,7 +11,7 @@ This is a small toy project I built when I joined Sheffield Teaching Hospitals t
 ## Features
 
 - Basic arithmetic operations (Add, Subtract, Multiply, Divide)
-- Separate test project for unit testing
+- Separate test project for unit testing, and unit testing best practices
 - Lint-check setup to enforce,
         code style
         best practices
@@ -37,7 +37,7 @@ Although this project does not solve a new real-world business problem, it was u
 
 In the requirements phase, I analysed the original Windows Calculator application to understand expected behaviour, user interactions, and edge cases. This helped define the functional requirements for the project.
 
-In the design phase, I focused on separating concerns by isolating the calculation logic from the UI layer, ensuring the codebase remained clean and testable.
+In the design phase, I separated calculation logic from the UI to apply separation of concerns, which improved maintainability, testability, and reusability by reducing coupling and aligning the design with encapsulation and abstraction principles.
 
 During implementation, I built the application using C# and .NET 8, following good coding practices and structured project organisation. Unit tests were added to validate core functionality, and a CI pipeline using GitHub Actions was introduced to automate build and test processes.
 
